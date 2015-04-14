@@ -1,6 +1,6 @@
 {
   "name": "cirrus-tlPageLock",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "authors": [
     "Marco Bachmann <mb@triarc-labs.com>"
   ],
@@ -16,9 +16,12 @@
     "test",
     "tests"
   ],
+  "typescript": {
+    "definition": "tlPageLock.d.ts"
+  },
   "endpoint": "https://github.com/triarc/cirrus-tlPageLock.git",
   "dependencies": {
-    "cirrus-tlModal": "~0.0.5",
+    "cirrus-tlModal": "~0.0.6",
     "cirrus-utils": "~0.0.5"
   }
 }
