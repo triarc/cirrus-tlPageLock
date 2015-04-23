@@ -21,7 +21,7 @@
   },
   "endpoint": "https://github.com/triarc/cirrus-tlPageLock.git",
   "dependencies": {
-    "cirrus-tlModal": "~0.0.6",
-    "cirrus-utils": "~0.0.5"
+    "cirrus-tlModal": "~0.0.12",
+    "cirrus-utils": "~0.1.0"
   }
 }
