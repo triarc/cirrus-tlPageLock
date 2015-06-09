@@ -73,11 +73,8 @@ var Triarc;
                 var _this = this;
                 if (message === void 0) { message = "_defaultLooseDataMessage"; }
                 this.watchMeLockConfirmMessage = this.$filter('translate')(message);
-                if (Triarc.hasNoValue(this.watchRegistration)) {
-                    this.watchRegistration();
-                }
-                this.watchMeLock = false;
                 this.watchRegistration = $scope.$watch(watchValue, function (newValue, oldValue) {
+                    _this.watchMeLock = false;
                     if (newValue != oldValue && newValue == watchResult) {
                         _this.watchMeLock = true;
                     }
@@ -85,6 +82,9 @@ var Triarc;
                         _this.watchMeLock = false;
                     }
                 });
+                if (Triarc.hasNoValue(this.watchRegistration)) {
+                    this.watchRegistration();
+                }
             };
             PageLockService.prototype.stopWatchingMe = function () {
                 this.watchMeLock = false;
