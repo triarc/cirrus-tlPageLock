@@ -37,7 +37,7 @@ var Triarc;
                             }
                         }, angular.noop);
                     }
-                    if (_this.watchDirtyFormVar && _this.form.$dirty) {
+                    if (!_this.promiseLock && _this.watchDirtyFormVar && _this.form.$dirty) {
                         event.preventDefault();
                         _this.buttonLock = true;
                         Modal.openConfirmModal(_this.watchFormLockConfirmMessage, _this.$modal).then(function (confirm) {
@@ -58,6 +58,7 @@ var Triarc;
                 this.inProgressToaster(this.$filter('translate')(toasterMessage));
                 var update = function () {
                     _this.buttonLock = _this.promiseLock = false, _this.clearToaster();
+                    _this.releaseBlockNavigation();
                 };
                 promise.then(update, update);
                 return promise;
