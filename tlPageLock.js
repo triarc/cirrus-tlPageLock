@@ -39,11 +39,13 @@ var Triarc;
                     }
                     if (_this.watchDirtyFormVar && _this.form.$dirty) {
                         event.preventDefault();
+                        _this.buttonLock = true;
                         Modal.openConfirmModal(_this.watchFormLockConfirmMessage, _this.$modal).then(function (confirm) {
                             if (confirm) {
                                 _this.stopWatchingDirtyForm();
                                 _this.$state.transitionTo(next);
                             }
+                            _this.buttonLock = false;
                         }, angular.noop);
                     }
                 });
