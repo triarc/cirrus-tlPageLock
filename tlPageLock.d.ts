@@ -13,7 +13,7 @@ declare module Triarc.PageLock {
         private watchMeLock;
         private watchMeLockConfirmMessage;
         private watchRegistration;
-        private watchDirtyForm;
+        private watchDirtyFormVar;
         private form;
         private dirtyFormRegistration;
         private watchFormLockConfirmMessage;

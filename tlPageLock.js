@@ -21,7 +21,7 @@ var Triarc;
                                 if (Triarc.hasNoValue(_this.watchRegistration)) {
                                     _this.watchRegistration();
                                 }
-                                if (Triarc.hasNoValue(_this.watchDirtyForm)) {
+                                if (Triarc.hasNoValue(_this.watchDirtyFormVar)) {
                                 }
                                 console.log(_this.buttonLock);
                                 _this.$state.transitionTo(next);
@@ -37,7 +37,7 @@ var Triarc;
                             }
                         }, angular.noop);
                     }
-                    if (_this.watchDirtyForm && _this.form.$dirty) {
+                    if (_this.watchDirtyFormVar && _this.form.$dirty) {
                         event.preventDefault();
                         Modal.openConfirmModal(_this.watchFormLockConfirmMessage, _this.$modal).then(function (confirm) {
                             if (confirm) {
@@ -97,16 +97,16 @@ var Triarc;
                 if (Triarc.hasNoValue(this.dirtyFormRegistration)) {
                     this.dirtyFormRegistration();
                 }
-                this.watchDirtyForm = false;
+                this.watchDirtyFormVar = false;
                 this.watchRegistration = $scope.$watch(formName, function (form) {
                     if (Triarc.hasNoValue(form)) {
                         _this.form = form;
-                        _this.watchDirtyForm = true;
+                        _this.watchDirtyFormVar = true;
                         _this.watchRegistration();
                     }
                     else {
                         _this.form = null;
-                        _this.watchDirtyForm = false;
+                        _this.watchDirtyFormVar = false;
                     }
                 });
             };
@@ -114,7 +114,7 @@ var Triarc;
                 if (Triarc.hasNoValue(this.dirtyFormRegistration)) {
                     this.dirtyFormRegistration();
                 }
-                this.watchDirtyForm = false;
+                this.watchDirtyFormVar = false;
                 this.form = null;
             };
             PageLockService.prototype.inProgressToaster = function (message) {
