@@ -99,7 +99,7 @@ var Triarc;
                 }
                 this.watchDirtyFormVar = false;
                 this.watchRegistration = $scope.$watch(formName, function (form) {
-                    if (Triarc.hasNoValue(form)) {
+                    if (Triarc.hasValue(form)) {
                         _this.form = form;
                         _this.watchDirtyFormVar = true;
                         _this.watchRegistration();
