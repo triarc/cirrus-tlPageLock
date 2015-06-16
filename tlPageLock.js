@@ -28,7 +28,7 @@ var Triarc;
                             }
                         }, angular.noop);
                     }
-                    if (_this.watchMeLock) {
+                    else if (_this.watchMeLock) {
                         event.preventDefault();
                         Modal.openConfirmModal(_this.$filter('translate')(_this.watchMeLockConfirmMessage), _this.$modal).then(function (confirm) {
                             if (confirm) {
@@ -37,7 +37,7 @@ var Triarc;
                             }
                         }, angular.noop);
                     }
-                    if (!_this.promiseLock && _this.watchDirtyFormVar && _this.form.$dirty) {
+                    else if (_this.watchDirtyFormVar && _this.form.$dirty) {
                         event.preventDefault();
                         _this.buttonLock = true;
                         Modal.openConfirmModal(_this.watchFormLockConfirmMessage, _this.$modal).then(function (confirm) {
