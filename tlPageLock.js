@@ -94,7 +94,7 @@ var Triarc;
                 var _this = this;
                 if (message === void 0) { message = "_defaultLooseDataMessage"; }
                 this.watchFormLockConfirmMessage = this.$filter('translate')(message);
-                if (Triarc.hasNoValue(this.dirtyFormRegistration)) {
+                if (Triarc.hasValue(this.dirtyFormRegistration)) {
                     this.dirtyFormRegistration();
                 }
                 this.watchDirtyFormVar = false;
@@ -111,7 +111,7 @@ var Triarc;
                 });
             };
             PageLockService.prototype.stopWatchingDirtyForm = function () {
-                if (Triarc.hasNoValue(this.dirtyFormRegistration)) {
+                if (Triarc.hasValue(this.dirtyFormRegistration)) {
                     this.dirtyFormRegistration();
                 }
                 this.watchDirtyFormVar = false;
