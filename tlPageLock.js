@@ -28,7 +28,7 @@ var Triarc;
                             }
                         }, angular.noop);
                     }
-                    else if (_this.watchMeLock) {
+                    if (_this.watchMeLock) {
                         event.preventDefault();
                         Modal.openConfirmModal(_this.$filter('translate')(_this.watchMeLockConfirmMessage), _this.$modal).then(function (confirm) {
                             if (confirm) {
@@ -37,7 +37,7 @@ var Triarc;
                             }
                         }, angular.noop);
                     }
-                    else if (_this.watchDirtyFormVar && _this.form.$dirty) {
+                    if (_this.watchDirtyFormVar && _this.form.$dirty) {
                         event.preventDefault();
                         _this.buttonLock = true;
                         Modal.openConfirmModal(_this.watchFormLockConfirmMessage, _this.$modal).then(function (confirm) {
@@ -57,7 +57,7 @@ var Triarc;
                 this.promiseLockConfirmMessage = this.$filter('translate')(confirmationMessage);
                 this.inProgressToaster(this.$filter('translate')(toasterMessage));
                 var update = function () {
-                    _this.buttonLock = _this.promiseLock = false, _this.clearToaster();
+                    _this.buttonLock = _this.watchDirtyFormVar = _this.promiseLock = false, _this.clearToaster();
                     _this.releaseBlockNavigation();
                 };
                 promise.then(update, update);
@@ -78,10 +78,10 @@ var Triarc;
                 this.watchMeLockConfirmMessage = this.$filter('translate')(message);
                 this.watchRegistration = $scope.$watch(watchValue, function (newValue, oldValue) {
                     _this.watchMeLock = false;
-                    if (newValue != oldValue && newValue == watchResult) {
+                    if (newValue !== oldValue && newValue === watchResult) {
                         _this.watchMeLock = true;
                     }
-                    else if (newValue != oldValue && newValue != watchResult) {
+                    else if (newValue !== oldValue && newValue !== watchResult) {
                         _this.watchMeLock = false;
                     }
                 });
