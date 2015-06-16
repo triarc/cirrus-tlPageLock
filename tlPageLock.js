@@ -18,10 +18,10 @@ var Triarc;
                         Modal.openConfirmModal(_this.$filter('translate')(_this.promiseLockConfirmMessage), _this.$modal).then(function (confirm) {
                             if (confirm) {
                                 _this.releaseBlockNavigation();
-                                if (Triarc.hasNoValue(_this.watchRegistration)) {
+                                if (Triarc.hasValue(_this.watchRegistration)) {
                                     _this.watchRegistration();
                                 }
-                                if (Triarc.hasNoValue(_this.watchDirtyFormVar)) {
+                                if (Triarc.hasValue(_this.watchDirtyFormVar)) {
                                 }
                                 console.log(_this.buttonLock);
                                 _this.$state.transitionTo(next);
@@ -82,7 +82,7 @@ var Triarc;
                         _this.watchMeLock = false;
                     }
                 });
-                if (Triarc.hasNoValue(this.watchRegistration)) {
+                if (Triarc.hasValue(this.watchRegistration)) {
                     this.watchRegistration();
                 }
             };
