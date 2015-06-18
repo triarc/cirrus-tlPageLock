@@ -12,19 +12,19 @@ var Triarc;
                 this.$rootScope = $rootScope;
                 this.$filter = $filter;
                 this.$modal = $modal;
-                this.$rootScope.$on("$stateChangeStart", function (event, next, nextargs) {
+                this.$rootScope.$on("$stateChangeStart", function (event, next, current) {
                     if (_this.promiseLock) {
                         event.preventDefault();
                         Modal.openConfirmModal(_this.$filter('translate')(_this.promiseLockConfirmMessage), _this.$modal).then(function (confirm) {
                             if (confirm) {
                                 _this.releaseBlockNavigation();
-                                if (Triarc.hasNoValue(_this.watchRegistration)) {
+                                if (Triarc.hasValue(_this.watchRegistration)) {
                                     _this.watchRegistration();
                                 }
-                                if (Triarc.hasNoValue(_this.watchDirtyForm)) {
+                                if (Triarc.hasValue(_this.watchDirtyFormVar)) {
                                 }
                                 console.log(_this.buttonLock);
-                                _this.$state.transitionTo(next, nextargs);
+                                _this.$state.transitionTo(next, current);
                             }
                         }, angular.noop);
                     }
@@ -33,17 +33,19 @@ var Triarc;
                         Modal.openConfirmModal(_this.$filter('translate')(_this.watchMeLockConfirmMessage), _this.$modal).then(function (confirm) {
                             if (confirm) {
                                 _this.stopWatchingMe();
-                                _this.$state.transitionTo(next, nextargs);
+                                _this.$state.transitionTo(next, current);
                             }
                         }, angular.noop);
                     }
-                    if (_this.watchDirtyForm && _this.form.$dirty) {
+                    if (_this.watchDirtyFormVar && _this.form.$dirty) {
                         event.preventDefault();
+                        _this.buttonLock = true;
                         Modal.openConfirmModal(_this.watchFormLockConfirmMessage, _this.$modal).then(function (confirm) {
                             if (confirm) {
                                 _this.stopWatchingDirtyForm();
-                                _this.$state.transitionTo(next, nextargs);
+                                _this.$state.transitionTo(next, current);
                             }
+                            _this.buttonLock = false;
                         }, angular.noop);
                     }
                 });
@@ -55,7 +57,8 @@ var Triarc;
                 this.promiseLockConfirmMessage = this.$filter('translate')(confirmationMessage);
                 this.inProgressToaster(this.$filter('translate')(toasterMessage));
                 var update = function () {
-                    _this.buttonLock = _this.promiseLock = false, _this.clearToaster();
+                    _this.buttonLock = _this.watchDirtyFormVar = _this.promiseLock = false, _this.clearToaster();
+                    _this.releaseBlockNavigation();
                 };
                 promise.then(update, update);
                 return promise;
@@ -75,14 +78,14 @@ var Triarc;
                 this.watchMeLockConfirmMessage = this.$filter('translate')(message);
                 this.watchRegistration = $scope.$watch(watchValue, function (newValue, oldValue) {
                     _this.watchMeLock = false;
-                    if (newValue != oldValue && newValue == watchResult) {
+                    if (newValue !== oldValue && newValue === watchResult) {
                         _this.watchMeLock = true;
                     }
-                    else if (newValue != oldValue && newValue != watchResult) {
+                    else if (newValue !== oldValue && newValue !== watchResult) {
                         _this.watchMeLock = false;
                     }
                 });
-                if (Triarc.hasNoValue(this.watchRegistration)) {
+                if (Triarc.hasValue(this.watchRegistration)) {
                     this.watchRegistration();
                 }
             };
@@ -94,27 +97,27 @@ var Triarc;
                 var _this = this;
                 if (message === void 0) { message = "_defaultLooseDataMessage"; }
                 this.watchFormLockConfirmMessage = this.$filter('translate')(message);
-                if (Triarc.hasNoValue(this.dirtyFormRegistration)) {
+                if (Triarc.hasValue(this.dirtyFormRegistration)) {
                     this.dirtyFormRegistration();
                 }
-                this.watchDirtyForm = false;
+                this.watchDirtyFormVar = false;
                 this.watchRegistration = $scope.$watch(formName, function (form) {
-                    if (Triarc.hasNoValue(form)) {
+                    if (Triarc.hasValue(form)) {
                         _this.form = form;
-                        _this.watchDirtyForm = true;
+                        _this.watchDirtyFormVar = true;
                         _this.watchRegistration();
                     }
                     else {
                         _this.form = null;
-                        _this.watchDirtyForm = false;
+                        _this.watchDirtyFormVar = false;
                     }
                 });
             };
             PageLockService.prototype.stopWatchingDirtyForm = function () {
-                if (Triarc.hasNoValue(this.dirtyFormRegistration)) {
+                if (Triarc.hasValue(this.dirtyFormRegistration)) {
                     this.dirtyFormRegistration();
                 }
-                this.watchDirtyForm = false;
+                this.watchDirtyFormVar = false;
                 this.form = null;
             };
             PageLockService.prototype.inProgressToaster = function (message) {
