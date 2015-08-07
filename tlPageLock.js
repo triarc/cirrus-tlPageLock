@@ -12,6 +12,7 @@ var Triarc;
                 this.$rootScope = $rootScope;
                 this.$filter = $filter;
                 this.$modal = $modal;
+                this.$locks = [];
                 this.$rootScope.$on("$stateChangeStart", function (event, next, current) {
                     if (_this.promiseLock) {
                         event.preventDefault();
