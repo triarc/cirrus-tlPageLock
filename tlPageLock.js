@@ -55,7 +55,7 @@ var Triarc;
                         event.preventDefault();
                         Modal.openConfirmModal(lock.message, _this.$modal).then(function (confirm) {
                             if (confirm) {
-                                _this.$locks.forEach(function (l) { return l.release(); });
+                                _this.$locks.toEnumerable().toArray().forEach(function (l) { return l.release(); });
                                 _this.$state.transitionTo(next, current);
                             }
                         });
