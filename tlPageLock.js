@@ -49,7 +49,7 @@ var Triarc;
                             _this.buttonLock = false;
                         }, angular.noop);
                     }
-                    _this.$locks.forEach(function (lock) {
+                    _this.$locks.every(function (lock) {
                         if (!lock.form[lock.field])
                             return true;
                         event.preventDefault();
