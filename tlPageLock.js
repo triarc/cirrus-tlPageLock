@@ -59,6 +59,7 @@ var Triarc;
                                 _this.$state.transitionTo(next, current);
                             }
                         });
+                        return false;
                     });
                 });
             }
