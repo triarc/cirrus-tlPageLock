@@ -48,6 +48,17 @@ var Triarc;
                             _this.buttonLock = false;
                         }, angular.noop);
                     }
+                    _this.$locks.forEach(function (lock) {
+                        if (!lock.form[lock.field])
+                            return true;
+                        event.preventDefault();
+                        Modal.openConfirmModal(lock.message, _this.$modal).then(function (confirm) {
+                            if (confirm) {
+                                lock.release();
+                                _this.$state.transitionTo(next, current);
+                            }
+                        });
+                    });
                 });
             }
             PageLockService.prototype.blockNavigation = function (toasterMessage, promise, confirmationMessage) {
@@ -92,6 +103,31 @@ var Triarc;
             PageLockService.prototype.stopWatchingMe = function () {
                 this.watchMeLock = false;
                 this.watchRegistration();
+            };
+            PageLockService.prototype.createFormLock = function ($scope, formName, field, message) {
+                var _this = this;
+                if (field === void 0) { field = "$dirty"; }
+                if (message === void 0) { message = "_defaultLooseDataMessage"; }
+                var unwatch = $scope.$watch(formName, function (form) {
+                    if (Triarc.hasValue(form)) {
+                        lock.form = form;
+                        unwatch();
+                    }
+                    else {
+                        lock.form = null;
+                    }
+                });
+                var lock = {
+                    message: this.$filter('translate')(message),
+                    field: field,
+                    release: function () {
+                        unwatch();
+                        _this.$locks.remove(lock);
+                    },
+                    form: null
+                };
+                this.$locks.add(lock);
+                return lock;
             };
             PageLockService.prototype.watchMyDirtyForm = function ($scope, formName, message) {
                 var _this = this;

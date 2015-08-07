@@ -24,11 +24,19 @@ declare module Triarc.PageLock {
         releaseBlockNavigation(): void;
         watchMe($scope: ng.IScope, watchValue: string, watchResult: any, message?: string): void;
         stopWatchingMe(): void;
+        createFormLock($scope: angular.IScope, formName: string, field?: string, message?: string): IFormLock;
         watchMyDirtyForm($scope: ng.IScope, formName: string, message?: string): void;
         stopWatchingDirtyForm(): void;
         private inProgressToaster(message);
         private createToastr(message);
         private clearToaster();
         $waitToaster: JQuery;
+        private $locks;
+    }
+    interface IFormLock {
+        message: string;
+        field: string;
+        form: ng.IFormController;
+        release(): void;
     }
 }
