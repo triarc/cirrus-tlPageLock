@@ -70,7 +70,8 @@ var Triarc;
                 this.promiseLockConfirmMessage = this.$filter('translate')(confirmationMessage);
                 this.inProgressToaster(this.$filter('translate')(toasterMessage));
                 var update = function () {
-                    _this.buttonLock = _this.watchDirtyFormVar = _this.promiseLock = false, _this.clearToaster();
+                    _this.buttonLock = _this.watchDirtyFormVar = _this.promiseLock = false,
+                        _this.clearToaster();
                     _this.releaseBlockNavigation();
                 };
                 promise.then(update, update);

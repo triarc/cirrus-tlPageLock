@@ -18,14 +18,14 @@ declare module Triarc.PageLock {
         private dirtyFormRegistration;
         private watchFormLockConfirmMessage;
         buttonLock: boolean;
-        constructor($browser: any, $state: any, $location: ng.ILocationService, $rootScope: ng.IRootScopeService, $filter: ng.IFilterService, $modal: any);
-        blockNavigation<T>(toasterMessage: string, promise: ng.IPromise<T>, confirmationMessage?: string): ng.IPromise<T>;
-        showToaster<T>(toasterMessage: string, promise: ng.IPromise<T>): void;
+        constructor($browser: any, $state: any, $location: angular.ILocationService, $rootScope: angular.IRootScopeService, $filter: angular.IFilterService, $modal: any);
+        blockNavigation<T>(toasterMessage: string, promise: angular.IPromise<T>, confirmationMessage?: string): angular.IPromise<T>;
+        showToaster<T>(toasterMessage: string, promise: angular.IPromise<T>): void;
         releaseBlockNavigation(): void;
-        watchMe($scope: ng.IScope, watchValue: string, watchResult: any, message?: string): void;
+        watchMe($scope: angular.IScope, watchValue: string, watchResult: any, message?: string): void;
         stopWatchingMe(): void;
         createFormLock($scope: angular.IScope, formName: string, field?: string, message?: string): IFormLock;
-        watchMyDirtyForm($scope: ng.IScope, formName: string, message?: string): void;
+        watchMyDirtyForm($scope: angular.IScope, formName: string, message?: string): void;
         stopWatchingDirtyForm(): void;
         private inProgressToaster(message);
         private createToastr(message);
@@ -36,7 +36,7 @@ declare module Triarc.PageLock {
     interface IFormLock {
         message: string;
         field: string;
-        form: ng.IFormController;
+        form: angular.IFormController;
         release(): void;
     }
 }

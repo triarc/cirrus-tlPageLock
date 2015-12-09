@@ -1,10 +1,9 @@
 {
   "name": "cirrus-tlPageLock",
   "version": "0.0.23",
-  "authors": [
-    "Marco Bachmann <mb@triarc-labs.com>"
+  "main": [
+    "tlPageLock.js"
   ],
-  "main": "tlPageLock.js",
   "moduleType": [
     "globals"
   ],
